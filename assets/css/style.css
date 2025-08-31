@@ -1,0 +1,358 @@
+/* Table of Contents
+1. Global Styles & Variables
+2. Preloader
+3. Navigation Bar
+4. Hero Section
+5. General Page & Section Styles
+6. Buttons
+7. Cards (Project, Skill, Stat)
+8. Experience Timeline
+9. Contact Form & Info
+10. Footer
+11. Animations
+*/
+
+/* 1. Global Styles & Variables */
+:root {
+    --primary-color: #00e0ff;
+    --secondary-color: #aa77ff;
+    --dark-bg: #0a192f;
+    --light-bg: #112240;
+    --text-color: #ccd6f6;
+    --text-light: #8892b0;
+    --glow-shadow: 0 0 15px rgba(0, 224, 255, 0.6);
+    --glow-shadow-hover: 0 0 25px rgba(0, 224, 255, 0.9);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* 2. Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: var(--dark-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.loader {
+    border: 5px solid var(--light-bg);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+/* 3. Navigation Bar */
+.navbar {
+    background: rgba(10, 25, 47, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--light-bg);
+    transition: background-color 0.3s;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary-color) !important;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    margin: 0 10px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease-out;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 50%;
+}
+
+
+/* 4. Hero Section */
+#hero {
+    min-height: 100vh;
+    background: var(--dark-bg);
+    position: relative;
+    padding: 0 20px;
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+#hero h2 {
+    font-size: 2rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+#hero #typed {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.profile-pic {
+    border-radius: 50%;
+    border: 5px solid var(--light-bg);
+    box-shadow: 0 0 30px rgba(0, 224, 255, 0.3);
+    max-width: 350px;
+}
+
+/* 5. General Page & Section Styles */
+.page-content {
+    padding-top: 120px;
+    padding-bottom: 60px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.section-title h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.section-title p {
+    color: var(--text-light);
+}
+
+/* 6. Buttons */
+.btn-primary-glow {
+    background: var(--primary-color);
+    color: var(--dark-bg);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    box-shadow: var(--glow-shadow);
+    transition: all 0.3s ease;
+}
+.btn-primary-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glow-shadow-hover);
+    background: var(--primary-color);
+    color: var(--dark-bg);
+}
+.btn-secondary-outline {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+.btn-secondary-outline:hover {
+    background: var(--primary-color);
+    color: var(--dark-bg);
+}
+
+/* 7. Cards */
+.card-glow {
+    background: var(--light-bg);
+    border: 1px solid #1d2d50;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 25px;
+}
+.card-glow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card { text-align: center; }
+.stat-card h3 { font-size: 2.5rem; color: var(--primary-color); }
+.stat-card p { color: var(--text-light); }
+
+.skill-card {
+    background: var(--light-bg);
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+.skill-card:hover {
+    transform: scale(1.1);
+    background: #19315a;
+}
+.skill-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+.skill-card p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+.skills-subtitle {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--light-bg);
+    padding-bottom: 10px;
+}
+
+.project-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.project-card h5 { color: var(--primary-color); }
+.project-tech { font-size: 0.8rem; color: var(--text-light); font-family: monospace;}
+.project-links { margin-top: auto; }
+.project-links a { margin-right: 15px; }
+.project-links i { margin-right: 5px; }
+
+/* 8. Experience Timeline */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background: var(--light-bg);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+}
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+}
+.timeline-item:nth-child(odd) { left: 0; }
+.timeline-item:nth-child(even) { left: 50%; }
+.timeline-dot {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: -8px;
+    background-color: var(--primary-color);
+    border: 4px solid var(--dark-bg);
+    top: 25px;
+    border-radius: 50%;
+    z-index: 1;
+}
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -8px;
+}
+.timeline-content {
+    position: relative;
+}
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+@media (max-width: 768px) {
+    .timeline::after { left: 20px; }
+    .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; }
+    .timeline-item:nth-child(even) { left: 0%; }
+    .timeline-dot { left: 12px; }
+}
+
+/* 9. Contact Form & Info */
+.contact-info .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.contact-info i {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-right: 20px;
+    width: 40px;
+    text-align: center;
+}
+.form-control {
+    background-color: var(--dark-bg);
+    border: 1px solid var(--light-bg);
+    color: var(--text-color);
+}
+.form-control:focus {
+    background-color: var(--dark-bg);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+    color: var(--text-color);
+}
+.social-links a {
+    font-size: 24px;
+    margin-right: 15px;
+}
+
+/* 10. Footer */
+footer {
+    background: var(--light-bg);
+    border-top: 1px solid #1d2d50;
+    color: var(--text-light);
+}
+
+/* 11. Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
