@@ -1,4 +1,5 @@
-# 💼 Personal Portfolio Website
+# 💼 Personal Portfolio Website 
+![Repo Views](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/AmSh4/Portfolio&title=Repo%20Views)
 
 A simple and elegant portfolio website to showcase my profile, skills, and projects.
 
