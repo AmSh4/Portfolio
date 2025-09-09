@@ -1,27 +1,43 @@
-/* Table of Contents
-1. Global Styles & Variables
-2. Preloader
-3. Navigation Bar
-4. Hero Section
-5. General Page & Section Styles
-6. Buttons
-7. Cards (Project, Skill, Stat)
-8. Experience Timeline
-9. Contact Form & Info
-10. Footer
-11. Animations
-*/
+/* ===================================================
+   Gemini Aurora Theme v2 by Gemini
+   ===================================================
+   Table of Contents
+   1. Global Styles & Variables
+   2. Custom Cursor & Animated Background
+   3. Preloader & Entrance Animation
+   4. Navigation Bar (Glassmorphism)
+   5. Hero Section with Cursor Spotlight
+   6. General Page & Section Styles
+   7. Buttons
+   8. Cards (Project, Skill, Stat) with Aurora Hover
+   9. Experience Timeline (Animated)
+   10. Contact Form & Info
+   11. Footer
+   12. Animations & Enhancements
+====================================================== */
 
 /* 1. Global Styles & Variables */
 :root {
-    --primary-color: #00e0ff;
-    --secondary-color: #aa77ff;
-    --dark-bg: #0a192f;
-    --light-bg: #112240;
-    --text-color: #ccd6f6;
-    --text-light: #8892b0;
-    --glow-shadow: 0 0 15px rgba(0, 224, 255, 0.6);
-    --glow-shadow-hover: 0 0 25px rgba(0, 224, 255, 0.9);
+    --primary-color: #e11d48;   /* Vibrant Rose */
+    --secondary-color: #06b6d4; /* Electric Cyan */
+    --accent-color: #7c3aed;    /* Deep Violet */
+    --aurora-pink: #ec4899;      /* Fuchsia/Pink */
+    --aurora-blue: #38bdf8;      /* Sky Blue */
+    --dark-bg: #020617;         /* Midnight Slate (near black) */
+    --light-bg: #1e293b;        /* Lighter Slate for cards */
+    --text-color: #f8fafc;      /* Clean Off-White (Slate 50) */
+    --text-light: #94a3b8;      /* Soft Gray for secondary text (Slate 400) */
+    --glow-shadow: 0 0 15px rgba(225, 29, 72, 0.5);
+    --glow-shadow-hover: 0 0 25px rgba(225, 29, 72, 0.8);
+    --border-color: #334155;    /* Subtle dark gray border (Slate 700) */
+}
+
+/* 2. Custom Cursor & Animated Background */
+html {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5" fill="none" opacity="0.8"/><circle cx="12" cy="12" r="2" fill="white" opacity="0.8"/></svg>'), auto;
+}
+a, button, .btn, .nav-link {
+     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="%23e11d48" stroke-width="2" fill="rgba(255,255,255,0.5)"/><circle cx="12" cy="12" r="2" fill="%23e11d48"/></svg>'), pointer;
 }
 
 body {
@@ -29,24 +45,51 @@ body {
     background-color: var(--dark-bg);
     color: var(--text-color);
     overflow-x: hidden;
+    position: relative;
 }
 
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: all 0.3s ease;
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color), var(--aurora-pink), var(--secondary-color), var(--aurora-blue), var(--accent-color));
+    background-size: 600% 600%;
+    opacity: 0.25; /* Slightly more vibrant */
+    animation: flowing-gradient 45s ease-in-out infinite; /* Slower and smoother */
+    z-index: -2;
 }
 
-a:hover {
-    color: var(--secondary-color);
+/* Starfield Animation */
+@keyframes move-stars {
+    from { transform: translateY(0px); }
+    to   { transform: translateY(-2000px); }
 }
 
-h1, h2, h3, h4, h5, h6 {
-    color: var(--text-color);
-    font-weight: 600;
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%; /* Taller to allow for animation */
+    background-image: 
+        radial-gradient(1px 1px at 20px 30px, #eee, transparent),
+        radial-gradient(1px 1px at 40px 70px, #fff, transparent),
+        radial-gradient(1px 1px at 50px 160px, #ddd, transparent),
+        radial-gradient(1.5px 1.5px at 90px 40px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 130px 80px, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 160px 120px, #ddd, transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.3;
+    animation: move-stars 100s linear infinite;
+    z-index: -1;
 }
 
-/* 2. Preloader */
+/* 3. Preloader & Entrance Animation */
 #preloader {
     position: fixed;
     top: 0;
@@ -63,24 +106,31 @@ h1, h2, h3, h4, h5, h6 {
 
 .loader {
     border: 5px solid var(--light-bg);
-    border-top: 5px solid var(--primary-color);
+    border-image: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) 1;
+    border-top-color: transparent;
     border-radius: 50%;
     width: 50px;
     height: 50px;
     animation: spin 1s linear infinite;
 }
 
-/* 3. Navigation Bar */
+/* 4. Navigation Bar (Glassmorphism) */
 .navbar {
-    background: rgba(10, 25, 47, 0.85);
+    background: rgba(2, 6, 23, 0.6);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--light-bg);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
     transition: background-color 0.3s;
+    animation: page-entrance 0.8s ease-out forwards;
 }
 
 .navbar-brand {
     font-weight: 700;
-    color: var(--primary-color) !important;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 
 .nav-link {
@@ -99,121 +149,203 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: 0;
+    bottom: -2px;
     left: 50%;
-    background-color: var(--primary-color);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     transition: all 0.3s ease-out;
     transform: translateX(-50%);
+    border-radius: 1px;
 }
 
 .nav-link:hover::after, .nav-link.active::after {
     width: 50%;
 }
 
-
-/* 4. Hero Section */
+/* 5. Hero Section with Cursor Spotlight */
 #hero {
     min-height: 100vh;
-    background: var(--dark-bg);
+    background: transparent;
     position: relative;
     padding: 0 20px;
+    overflow: hidden; /* Contain the spotlight */
+    animation: page-entrance 0.8s 0.2s ease-out forwards;
+    opacity: 0; /* Initially hidden for entrance animation */
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 50%);
+    left: var(--mouse-x, 50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(225, 29, 72, 0.2) 0%, rgba(6, 182, 212, 0.1) 60%, transparent 80%);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    transition: top 0.2s ease-out, left 0.2s ease-out;
+    pointer-events: none; /* Allows clicking through the spotlight */
+    z-index: 0;
+}
+
+#hero .container {
+    position: relative; /* Ensure content is above the spotlight */
+    z-index: 1;
 }
 
 #hero h1 {
     font-size: 3.5rem;
     font-weight: 700;
+    color: var(--text-color);
 }
+
 #hero h2 {
     font-size: 2rem;
     color: var(--text-light);
     margin-bottom: 2rem;
 }
+
 #hero #typed {
-    color: var(--primary-color);
-    border-bottom: 3px solid var(--secondary-color);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    border-bottom: 3px solid var(--primary-color);
 }
 
 .profile-pic {
     border-radius: 50%;
     border: 5px solid var(--light-bg);
-    box-shadow: 0 0 30px rgba(0, 224, 255, 0.3);
+    box-shadow: 0 0 40px rgba(225, 29, 72, 0.25);
     max-width: 350px;
 }
 
-/* 5. General Page & Section Styles */
+/* 6. General Page & Section Styles */
 .page-content {
     padding-top: 120px;
     padding-bottom: 60px;
-    animation: fadeIn 1s ease-in-out;
+    opacity: 0; /* Initially hidden */
+    animation: page-entrance 0.8s 0.2s ease-out forwards;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
+
 .section-title h2 {
     font-size: 2.5rem;
     font-weight: 700;
     position: relative;
     display: inline-block;
     padding-bottom: 10px;
+    color: var(--text-color);
 }
+
 .section-title h2::after {
     content: '';
     position: absolute;
     display: block;
     width: 60px;
     height: 4px;
-    background: var(--primary-color);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    border-radius: 2px;
 }
 .section-title p {
     color: var(--text-light);
 }
 
-/* 6. Buttons */
+/* 7. Buttons */
 .btn-primary-glow {
-    background: var(--primary-color);
-    color: var(--dark-bg);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
     border: none;
     padding: 12px 25px;
     border-radius: 5px;
     font-weight: 600;
     box-shadow: var(--glow-shadow);
     transition: all 0.3s ease;
+    background-size: 150% 150%;
 }
 .btn-primary-glow:hover {
     transform: translateY(-3px);
     box-shadow: var(--glow-shadow-hover);
-    background: var(--primary-color);
-    color: var(--dark-bg);
+    background-position: right center;
 }
 .btn-secondary-outline {
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--border-color);
+    color: var(--text-color);
+    background-color: transparent;
     padding: 10px 25px;
     border-radius: 5px;
     font-weight: 600;
     margin-left: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+.btn-secondary-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 3px;
 }
 .btn-secondary-outline:hover {
-    background: var(--primary-color);
-    color: var(--dark-bg);
+    color: #fff;
+    border-color: transparent;
+}
+.btn-secondary-outline:hover::before {
+    transform: scaleX(1);
 }
 
-/* 7. Cards */
+/* 8. Cards (Project, Skill, Stat) with Aurora Hover */
 .card-glow {
     background: var(--light-bg);
-    border: 1px solid #1d2d50;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
     padding: 25px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1; /* Ensure card content is above the glow */
 }
+
+.card-glow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    padding-top: 150%;
+    background: radial-gradient(circle, rgba(225, 29, 72, 0.4) 0%, rgba(6, 182, 212, 0) 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: -1;
+}
+
 .card-glow:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-glow:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
 }
 
 .stat-card { text-align: center; }
@@ -225,63 +357,73 @@ h1, h2, h3, h4, h5, h6 {
     padding: 20px;
     text-align: center;
     border-radius: 8px;
-    transition: transform 0.3s;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s, background 0.3s, border-color 0.3s;
 }
 .skill-card:hover {
-    transform: scale(1.1);
-    background: #19315a;
+    transform: scale(1.08);
+    background: #334155;
+    border-color: var(--primary-color);
 }
 .skill-card i {
     font-size: 3rem;
+    color: var(--text-color);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+.skill-card:hover i {
     color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
 }
-.skill-card p {
-    margin-top: 10px;
-    font-size: 0.9rem;
-}
-.skills-subtitle {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--light-bg);
-    padding-bottom: 10px;
-}
+.skill-card p { margin-top: 10px; font-size: 0.9rem; color: var(--text-light); }
+.skills-subtitle { margin-top: 40px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
 
 .project-card {
-    height: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
-.project-card h5 { color: var(--primary-color); }
-.project-tech { font-size: 0.8rem; color: var(--text-light); font-family: monospace;}
-.project-links { margin-top: auto; }
-.project-links a { margin-right: 15px; }
-.project-links i { margin-right: 5px; }
+.project-card h5 { color: var(--text-color); }
+.project-card p { color: var(--text-light); font-size: 0.9rem; flex-grow: 1; }
+.project-card .project-links { margin-top: auto; }
+.project-tech-tags {
+    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.project-tech-tags span {
+    background-color: rgba(225, 29, 72, 0.1);
+    color: var(--primary-color);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(225, 29, 72, 0.2);
+}
 
-/* 8. Experience Timeline */
+/* 9. Experience Timeline (Animated) */
 .timeline {
     position: relative;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 .timeline::after {
     content: '';
     position: absolute;
     width: 3px;
-    background: var(--light-bg);
+    background: linear-gradient( to bottom, var(--primary-color), var(--secondary-color), var(--primary-color) );
+    background-size: 100% 200%;
+    animation: flow-down 4s linear infinite;
     top: 0;
     bottom: 0;
     left: 50%;
     margin-left: -1.5px;
+    border-radius: 3px;
 }
-.timeline-item {
-    padding: 10px 40px;
-    position: relative;
-    width: 50%;
-}
+.timeline-item { padding: 10px 40px; position: relative; width: 50%; }
 .timeline-item:nth-child(odd) { left: 0; }
 .timeline-item:nth-child(even) { left: 50%; }
 .timeline-dot {
-    content: '';
     position: absolute;
     width: 16px;
     height: 16px;
@@ -291,18 +433,10 @@ h1, h2, h3, h4, h5, h6 {
     top: 25px;
     border-radius: 50%;
     z-index: 1;
+    box-shadow: 0 0 10px var(--primary-color);
 }
-.timeline-item:nth-child(even) .timeline-dot {
-    left: -8px;
-}
-.timeline-content {
-    position: relative;
-}
-.timeline-date {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    font-style: italic;
-}
+.timeline-item:nth-child(even) .timeline-dot { left: -8px; }
+.timeline-date { font-size: 0.9rem; color: var(--text-light); font-style: italic; font-weight: 500; }
 @media (max-width: 768px) {
     .timeline::after { left: 20px; }
     .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; }
@@ -310,43 +444,45 @@ h1, h2, h3, h4, h5, h6 {
     .timeline-dot { left: 12px; }
 }
 
-/* 9. Contact Form & Info */
-.contact-info .info-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.contact-info i {
+/* 10. Contact Form & Info */
+.contact-info .info-item { display: flex; align-items: center; margin-bottom: 20px; }
+.contact-info .info-item i {
     font-size: 24px;
     color: var(--primary-color);
-    margin-right: 20px;
-    width: 40px;
-    text-align: center;
-}
-.form-control {
-    background-color: var(--dark-bg);
-    border: 1px solid var(--light-bg);
-    color: var(--text-color);
-}
-.form-control:focus {
-    background-color: var(--dark-bg);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 5px var(--primary-color);
-    color: var(--text-color);
-}
-.social-links a {
-    font-size: 24px;
+    background: rgba(225, 29, 72, 0.1);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
     margin-right: 15px;
 }
+.contact-info .info-item h4 { font-size: 1.1rem; margin: 0; }
+.contact-info .info-item p { margin: 0; color: var(--text-light); }
+.contact-info .info-item a { color: var(--text-light); text-decoration: none; transition: color 0.3s; }
+.contact-info .info-item a:hover { color: var(--primary-color); }
 
-/* 10. Footer */
-footer {
-    background: var(--light-bg);
-    border-top: 1px solid #1d2d50;
+.social-links a {
     color: var(--text-light);
+    font-size: 24px;
+    margin-right: 15px;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-block;
+}
+.social-links a:hover {
+    color: var(--primary-color);
+    transform: scale(1.2);
 }
 
-/* 11. Animations */
+.form-control { background-color: var(--dark-bg); border: 1px solid var(--border-color); color: var(--text-color); }
+.form-control::placeholder { color: var(--text-light); }
+.form-control:focus { background-color: var(--dark-bg); border-color: var(--primary-color); box-shadow: 0 0 5px var(--primary-color); color: var(--text-color); }
+
+/* 11. Footer */
+footer { background: var(--light-bg); border-top: 1px solid var(--border-color); color: var(--text-light); }
+
+/* 12. Animations */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -357,65 +493,25 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-
-
-/* ---------------------------------- */
-/* -- ENHANCEMENTS FOR PROJECT CARDS -- */
-/* ---------------------------------- */
-
-/* This makes sure all cards in a row are the same height */
-.d-flex.align-items-stretch {
-    display: flex;
-    align-items: stretch;
+@keyframes flowing-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* Styling for the project card content wrapper */
-.project-card {
-    width: 100%; /* Ensure card takes full width of its column */
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Added border-color transition */
-    border: 1px solid var(--light-bg); /* Add a default border */
+@keyframes flow-down {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
 }
 
-/* Enhanced hover effect for a brighter glow */
-.project-card:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--glow-shadow-hover);
+@keyframes page-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Remove the old project-tech paragraph styling */
-.project-tech {
-    display: none; /* We are replacing this with tags */
-}
-
-/* Container for the new tech tags */
-.project-tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 15px; /* Space between tags and description */
-}
-
-/* Individual tech tag styling */
-.project-tech-tags span {
-    background-color: rgba(0, 224, 255, 0.1); /* Faint glow background */
-    color: var(--primary-color);
-    padding: 4px 10px;
-    border-radius: 15px; /* Pill shape */
-    font-size: 0.75rem;
-    font-weight: 500;
-    border: 1px solid rgba(0, 224, 255, 0.2);
-}
-
-/* Making the link button style consistent */
-.project-links a.btn {
-    padding: 8px 20px;
-    font-size: 0.9rem;
-    display: inline-block; /* Fixes alignment */
-}
-
-.project-links a.btn i {
-    margin-right: 8px;
-}
