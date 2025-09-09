@@ -482,6 +482,89 @@ body::after {
 /* 11. Footer */
 footer { background: var(--light-bg); border-top: 1px solid var(--border-color); color: var(--text-light); }
 
+
+/* 12. Floating GitHub Button */
+#floating-github-btn {
+    position: fixed;
+    top: 120px;
+    right: 50px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    animation: page-entrance 0.8s 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+#floating-github-btn:hover {
+    transform: scale(1.1);
+}
+
+#floating-github-btn svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
+}
+
+#floating-github-btn .tooltip-text {
+    position: absolute;
+    bottom: 120%; /* Position above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--light-bg);
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+#floating-github-btn .tooltip-text::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--light-bg) transparent transparent transparent;
+}
+
+#floating-github-btn:hover .tooltip-text {
+    opacity: 1;
+    visibility: visible;
+}
+
+#floating-github-btn .waving-hand {
+    display: inline-block;
+    animation: wave-animation 2.5s infinite;
+    transform-origin: 70% 70%;
+}
+
+@keyframes wave-animation {
+   0% { transform: rotate( 0.0deg) }
+   10% { transform: rotate(14.0deg) }
+   20% { transform: rotate(-8.0deg) }
+   30% { transform: rotate(14.0deg) }
+   40% { transform: rotate(-4.0deg) }
+   50% { transform: rotate(10.0deg) }
+   60% { transform: rotate( 0.0deg) }
+  100% { transform: rotate( 0.0deg) }
+}
+
+
+
 /* 12. Animations */
 @keyframes spin {
     0% { transform: rotate(0deg); }
