@@ -632,3 +632,27 @@ footer { background: var(--light-bg); border-top: 1px solid var(--border-color);
 }
 
 
+
+/* ===================================
+   Mobile Screen Adjustments
+   ==================================== */
+@media (max-width: 767.98px) {
+
+    /* 3. Push content down to avoid navbar overlap */
+    #hero {
+        padding-top: 80px; 
+    }
+
+    /* 1. Make hero section buttons full-width and uniform */
+    #hero .btn {
+        width: 100%;
+        margin-bottom: 1rem; /* Adds space between the buttons */
+    }
+
+    /* 2. Add space between the text/button column and the photo */
+    #hero .col-md-7 {
+        margin-bottom: 3rem; 
+    }
+
+}
+
