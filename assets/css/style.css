@@ -632,3 +632,105 @@ footer { background: var(--light-bg); border-top: 1px solid var(--border-color);
 }
 
 
+
+/* ===================================
+   Mobile Screen Adjustments
+   ==================================== */
+@media (max-width: 767.98px) {
+
+    /* 3. Push content down to avoid navbar overlap */
+    #hero {
+        padding-top: 80px; 
+    }
+
+    /* 1. Make hero section buttons full-width and uniform */
+    #hero .btn {
+        width: 100%;
+        margin-bottom: 1rem; /* Adds space between the buttons */
+    }
+
+    /* 2. Add space between the text/button column and the photo */
+    #hero .col-md-7 {
+        margin-bottom: 3rem; 
+    }
+
+}
+
+
+
+/* ===================================
+   LIGHT & DARK THEME LOGIC
+   ==================================== */
+
+/* 1. Define Light Theme Color Variables */
+body.light-theme {
+    --dark-bg: #f8fafc;          /* Light Gray Background (Slate 50) */
+    --light-bg: #ffffff;         /* White for cards */
+    --text-color: #0f172a;       /* Dark Text (Slate 900) */
+    --text-light: #64748b;       /* Softer Gray for secondary text (Slate 500) */
+    --border-color: #e2e8f0;     /* Light Gray Border (Slate 200) */
+
+    /* Custom cursor for light theme */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="black" stroke-width="1.5" fill="none" opacity="0.8"/><circle cx="12" cy="12" r="2" fill="black" opacity="0.8"/></svg>'), auto;
+}
+
+/* 2. Specific Overrides for Light Theme */
+
+/* Disable starfield and reduce gradient in light mode */
+body.light-theme::after {
+    background-image: none;
+}
+body.light-theme::before {
+    opacity: 0.1; /* Make the aurora gradient much more subtle */
+}
+
+/* Update navbar for light theme glassmorphism */
+body.light-theme .navbar {
+    background: rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Update form controls for light theme */
+body.light-theme .form-control {
+    background-color: #f1f5f9; /* Slightly off-white */
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+body.light-theme .form-control:focus {
+    background-color: #fff;
+}
+
+/* Make timeline dot visible on light bg */
+body.light-theme .timeline-dot {
+    border: 4px solid var(--dark-bg);
+}
+
+
+/* 3. Style the Theme Toggle Button */
+#theme-toggle {
+    border-color: var(--border-color);
+    color: var(--text-light);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#theme-toggle:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background-color: rgba(225, 29, 72, 0.1);
+}
+
+/* Hide the moon icon by default */
+#theme-toggle .fa-moon {
+    display: none;
+}
+/* Show the sun icon in light mode */
+body.light-theme #theme-toggle .fa-moon {
+    display: block;
+}
+body.light-theme #theme-toggle .fa-sun {
+    display: none;
+}
+
