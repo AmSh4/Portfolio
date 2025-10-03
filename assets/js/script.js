@@ -77,4 +77,21 @@ document.addEventListener("DOMContentLoaded", function() {
             link.classList.remove('active');
         }
     });
+    
 });
+
+function downloadAndOpen(event) {
+    event.preventDefault();
+    const resumePath = 'assets/resume.pdf'; // <-- Make sure this path is correct!
+    
+    // Open in new tab
+    window.open(resumePath, '_blank');
+
+    // Trigger download
+    const link = document.createElement('a');
+    link.href = resumePath;
+    link.setAttribute('download', 'Ambuj_Shrivastav_Resume.pdf');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
